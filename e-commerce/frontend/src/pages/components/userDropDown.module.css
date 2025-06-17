@@ -1,0 +1,122 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownButton {
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownButton:focus,
+.dropdownButton:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.dropdownButton:hover {
+  color: var(--primary);
+  background-color: var(--hover-overlay);
+  transform: scale(1.1);
+}
+
+.dropdownButton:active {
+  transform: scale(0.95);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-xl);
+  z-index: 9999;
+  min-width: 200px;
+  animation: fadeInScale 0.2s ease-out;
+  overflow: hidden;
+}
+
+.dropdownHeader {
+  padding: 1rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.dropdownTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dropdownContent {
+  padding: 0.5rem;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.dropdownItem:focus,
+.dropdownItem:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.dropdownItem:last-child {
+  margin-bottom: 0;
+}
+
+.dropdownItem:hover {
+  background-color: var(--hover-overlay);
+  transform: translateX(2px);
+}
+
+.dropdownItemText {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.dropdownItem:hover .dropdownItemText {
+  color: var(--primary);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .dropdownMenu {
+    min-width: 180px;
+    right: -1rem;
+  }
+}
