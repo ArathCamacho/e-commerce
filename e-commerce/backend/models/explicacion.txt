@@ -1,0 +1,1 @@
+Los modelos son funciones para consultar la base de datos

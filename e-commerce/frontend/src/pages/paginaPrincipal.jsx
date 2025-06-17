@@ -1,4 +1,3 @@
-// src/pages/PaginaPrincipal.jsx
 import React from 'react';
 
 function PaginaPrincipal() {
