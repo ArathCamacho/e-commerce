@@ -172,12 +172,12 @@ export default function Registrarse() {
     setCurrentError("")
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("http://localhost:3001/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nombre, email, password }),
+        body: JSON.stringify({ username: nombre, email, password }),
       })
 
       if (response.ok) {
