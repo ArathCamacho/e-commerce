@@ -1,22 +1,8 @@
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useTheme } from "../context/themeContext"
+import { useTheme } from "../../context/themeContext"
+import { User } from "../home/Icons"
 import styles from "./userDropDown.module.css"
-
-const User = ({ size = 20, className = "" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    className={className}
-  >
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-    <circle cx="12" cy="7" r="4" />
-  </svg>
-)
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false)

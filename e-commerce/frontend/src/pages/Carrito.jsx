@@ -4,8 +4,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTheme } from "./context/themeContext"
 import styles from "./styles/Carrito.module.css"
-import { Heart, Search, ShoppingBag, Sun, Moon } from "lucide-react"
-import UserDropdown from "./components/userDropDown"
+import { Heart, Search, ShoppingBag, Sun, Moon } from "./components/home/Icons"
+import UserDropdown from "./components/layout/UserDropDown"
 
 export default function Carrito() {
   const navigate = useNavigate()
@@ -51,68 +51,74 @@ export default function Carrito() {
     <div className={`${styles.container} ${darkMode ? styles.dark : ""}`}>
       {/* Header */}
       <header
-              className={styles.header}
-              style={{
-                backgroundColor: darkMode
-                  ? `rgba(23, 23, 23, ${getHeaderOpacity()})`
-                  : `rgba(255, 255, 255, ${getHeaderOpacity()})`,
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              <div className={styles.headerContent}>
-                <div onClick={() => navigate("/")} className={styles.logo}>
-                  <div className={styles.logoContainer}>
-                    <div className={styles.logoCircle}>V</div>
-                    <span className={styles.logoText}>
-                      <span className={styles.logoTextGreen}>VAND</span>
-                      <span className={styles.logoTextBold}>ENTIALS</span>
-                    </span>
-                  </div>
-                </div>
-      
-                <nav className={styles.nav}>
-                  {["Mujer", "Hombre", "Niños", "Novedades", "Ofertas"].map((item) => (
-                    <div key={item} onClick={() => navigate(`/${item.toLowerCase()}`)} className={styles.navItem}>
-                      {item}
-                      <span className={styles.navUnderline}></span>
-                    </div>
-                  ))}
-                </nav>
-      
-                <div className={styles.headerActions}>
-                  {[
-                    { icon: Heart, label: "Wishlist" },
-                    { icon: Search, label: "Search" },
-                    { icon: ShoppingBag, label: "Cart" },
-                  ].map(({ icon: Icon, label }) => (
-                    <button key={label} aria-label={label} className={styles.headerButton} style={{ outline: "none" }}onClick={label === "Cart" ? () => navigate("/carrito") : undefined}>
-                      <Icon size={20} />
-                    </button>
-                  ))}
-      
-                  <UserDropdown />
-      
-                  <button
-                    onClick={toggleDarkMode}
-                    aria-label="Toggle dark mode"
-                    className={styles.themeToggle}
-                    style={{ outline: "none" }}
-                  >
-                    <div className={styles.themeToggleContent}>
-                      <Sun
-                        size={20}
-                        className={`${styles.themeIcon} ${darkMode ? styles.themeIconHidden : styles.themeIconVisible}`}
-                      />
-                      <Moon
-                        size={20}
-                        className={`${styles.themeIcon} ${darkMode ? styles.themeIconVisible : styles.themeIconHidden}`}
-                      />
-                    </div>
-                    <div className={styles.themeToggleGradient}></div>
-                  </button>
-                </div>
+        className={styles.header}
+        style={{
+          backgroundColor: darkMode
+            ? `rgba(23, 23, 23, ${getHeaderOpacity()})`
+            : `rgba(255, 255, 255, ${getHeaderOpacity()})`,
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <div className={styles.headerContent}>
+          <div onClick={() => navigate("/")} className={styles.logo}>
+            <div className={styles.logoContainer}>
+              <div className={styles.logoCircle}>V</div>
+              <span className={styles.logoText}>
+                <span className={styles.logoTextGreen}>VAND</span>
+                <span className={styles.logoTextBold}>ENTIALS</span>
+              </span>
+            </div>
+          </div>
+
+          <nav className={styles.nav}>
+            {["Mujer", "Hombre", "Niños", "Novedades", "Ofertas"].map((item) => (
+              <div key={item} onClick={() => navigate(`/${item.toLowerCase()}`)} className={styles.navItem}>
+                {item}
+                <span className={styles.navUnderline}></span>
               </div>
-            </header>
+            ))}
+          </nav>
+
+          <div className={styles.headerActions}>
+            {[
+              { icon: Heart, label: "Wishlist" },
+              { icon: Search, label: "Search" },
+              { icon: ShoppingBag, label: "Cart" },
+            ].map(({ icon: Icon, label }) => (
+              <button
+                key={label}
+                aria-label={label}
+                className={styles.headerButton}
+                style={{ outline: "none" }}
+                onClick={label === "Cart" ? () => navigate("/carrito") : undefined}
+              >
+                <Icon size={20} />
+              </button>
+            ))}
+
+            <UserDropdown />
+
+            <button
+              onClick={toggleDarkMode}
+              aria-label="Toggle dark mode"
+              className={styles.themeToggle}
+              style={{ outline: "none" }}
+            >
+              <div className={styles.themeToggleContent}>
+                <Sun
+                  size={20}
+                  className={`${styles.themeIcon} ${darkMode ? styles.themeIconHidden : styles.themeIconVisible}`}
+                />
+                <Moon
+                  size={20}
+                  className={`${styles.themeIcon} ${darkMode ? styles.themeIconVisible : styles.themeIconHidden}`}
+                />
+              </div>
+              <div className={styles.themeToggleGradient}></div>
+            </button>
+          </div>
+        </div>
+      </header>
 
       {/* Shopping Cart Content */}
       <main className={styles.mainContent}>
@@ -124,34 +130,39 @@ export default function Carrito() {
             <div className={styles.cartItems}>
               {cartItems.map((item) => (
                 <div key={item.id} className={styles.cartItem}>
-                  {/* Product Image */}
+                  {/* Product Image con corazón en esquina superior izquierda */}
                   <div className={styles.productImage}>
                     <img src={item.image || "/placeholder.svg"} alt={item.name} className={styles.imageElement} />
+                    <Heart size={12} className={styles.heartIcon} />
                   </div>
 
                   {/* Product Details */}
                   <div className={styles.productDetails}>
                     <div className={styles.productHeader}>
-                      <Heart size={16} className={styles.heartIcon} />
                       <h3 className={styles.productName}>{item.name}</h3>
                     </div>
                     <p className={styles.productPrice}>${item.price.toFixed(2)}</p>
 
                     <div className={styles.productInfo}>
                       <div className={styles.infoRow}>
-                        Id de art. <strong>{item.sku}</strong>
+                        <span className={styles.infoLabel}>Id de art.</span>
+                        <span className={styles.infoValue}>{item.sku}</span>
                       </div>
                       <div className={styles.infoRow}>
-                        Color: <strong>{item.color}</strong>
+                        <span className={styles.infoLabel}>Color</span>
+                        <span className={styles.infoValue}>{item.color}</span>
                       </div>
                       <div className={styles.infoRow}>
-                        Talla: <strong>{item.size}</strong>
+                        <span className={styles.infoLabel}>Talla</span>
+                        <span className={styles.infoValue}>{item.size}</span>
                       </div>
                       <div className={styles.infoRow}>
-                        Cantidad: <strong>{item.quantity}</strong>
+                        <span className={styles.infoLabel}>Cantidad</span>
+                        <span className={styles.infoValue}>{item.quantity}</span>
                       </div>
                       <div className={styles.infoRow}>
-                        Total: <strong>${(item.price * item.quantity).toFixed(2)}</strong>
+                        <span className={styles.infoLabel}>Total</span>
+                        <span className={styles.infoValue}>${(item.price * item.quantity).toFixed(2)}</span>
                       </div>
                     </div>
 

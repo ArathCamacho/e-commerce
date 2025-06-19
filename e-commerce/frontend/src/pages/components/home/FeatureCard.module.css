@@ -1,0 +1,38 @@
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.featureIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.featureIconSvg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.featureTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.featureDescription {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}

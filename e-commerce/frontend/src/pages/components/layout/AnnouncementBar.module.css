@@ -1,0 +1,29 @@
+/* Announcement Bar */
+.announcementBar {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.announcementScroll {
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+.announcementItem {
+  display: inline-block;
+  padding: 0 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

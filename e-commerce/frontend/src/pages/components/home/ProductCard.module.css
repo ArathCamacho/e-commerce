@@ -1,0 +1,128 @@
+.productCard {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.productCard:hover {
+  transform: translateY(-2px);
+}
+
+.productImageContainer {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: var(--bg-tertiary);
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-primary);
+}
+
+/* Quitar la sombra del hover y solo mantener transform sutil */
+.productCard:hover .productImageContainer {
+  transform: scale(1.02);
+  border-color: var(--primary);
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.productCard:hover .productImage {
+  transform: scale(1.05);
+}
+
+.productImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+  transition: all 0.3s ease;
+}
+
+.productCard:hover .productImageOverlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0));
+}
+
+/* Estilos del wishlist button integrados */
+.wishlistButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: white;
+  backdrop-filter: blur(8px);
+  padding: 0.5rem;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.wishlistButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #ef4444;
+}
+
+.wishlistButton:active {
+  transform: scale(0.95);
+}
+
+.wishlistButton:focus,
+.wishlistButton:active {
+  outline: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.wishlistIcon {
+  color: #6b7280;
+  transition: all 0.3s ease;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.wishlistButton:hover .wishlistIcon {
+  color: #ef4444;
+  stroke: #ef4444;
+}
+
+/* Mostrar el wishlist button en hover */
+.productCard:hover .wishlistButton {
+  opacity: 1;
+}
+
+.productName {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.productCard:hover .productName {
+  color: var(--primary);
+}
+
+.productPrice {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.productCard:hover .productPrice {
+  color: var(--primary-dark);
+}

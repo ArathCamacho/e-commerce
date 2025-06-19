@@ -1,0 +1,109 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownButton {
+  background-color: transparent;
+  color: var(--text-secondary); /* Cambiar de #6c757d a variable CSS */
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.dropdownButton:hover {
+  color: var(--primary); /* Cambiar de #6c757d a variable CSS para consistencia */
+  background-color: var(--hover-overlay);
+  transform: scale(1.1);
+}
+
+.dropdownButton:active {
+  transform: scale(0.95);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  min-width: 12rem;
+  padding: 0.5rem 0;
+  backdrop-filter: blur(8px);
+}
+
+.dropdownHeader {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.dropdownTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+  color: var(--text-secondary);
+}
+
+.dropdownItem:hover {
+  background-color: var(--hover-overlay);
+  color: var(--primary);
+}
+
+.dropdownItemText {
+  font-size: 0.875rem;
+  color: inherit;
+  font-weight: 500;
+}
+
+/* Dark mode específico ya está cubierto por las variables CSS */
+.dark .dropdownMenu {
+  background-color: var(--bg-primary);
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.dark .dropdownHeader {
+  border-bottom-color: var(--border-primary);
+}
+
+.dark .dropdownTitle {
+  color: var(--text-primary);
+}
+
+.dark .dropdownItem {
+  color: var(--text-secondary);
+}
+
+.dark .dropdownItem:hover {
+  background-color: var(--hover-overlay);
+  color: var(--primary);
+}
+
+.dark .dropdownItemText {
+  color: inherit;
+}

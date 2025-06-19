@@ -1,0 +1,143 @@
+.bestSellerCard {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.bestSellerCard:hover {
+  transform: translateY(-2px);
+}
+
+.bestSellerImageContainer {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: var(--bg-tertiary);
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-primary);
+}
+
+/* Quitar la sombra del hover y solo mantener transform sutil */
+.bestSellerCard:hover .bestSellerImageContainer {
+  transform: scale(1.02);
+  border-color: var(--primary);
+}
+
+.bestSellerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.bestSellerCard:hover .bestSellerImage {
+  transform: scale(1.05);
+}
+
+.bestSellerBadge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del wishlist button integrados */
+.wishlistButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: white;
+  backdrop-filter: blur(8px);
+  padding: 0.5rem;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.wishlistButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #ef4444;
+}
+
+.wishlistButton:active {
+  transform: scale(0.95);
+}
+
+.wishlistButton:focus,
+.wishlistButton:active {
+  outline: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.wishlistIcon {
+  color: #6b7280;
+  transition: all 0.3s ease;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.wishlistButton:hover .wishlistIcon {
+  color: #ef4444;
+  stroke: #ef4444;
+}
+
+/* Mostrar el wishlist button en hover */
+.bestSellerCard:hover .wishlistButton {
+  opacity: 1;
+}
+
+.bestSellerName {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.bestSellerCard:hover .bestSellerName {
+  color: var(--primary);
+}
+
+.bestSellerPrices {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bestSellerPrice {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.bestSellerCard:hover .bestSellerPrice {
+  color: var(--primary-dark);
+}
+
+.bestSellerOriginalPrice {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
