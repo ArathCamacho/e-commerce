@@ -5,6 +5,7 @@ import styles from "./styles/home.module.css"
 import UserDropdown from "./components/userDropDown"
 
 // Agregar después de los imports existentes
+
 const carouselImages = [
   "/images/carousel/carrousel1.jpg",
   "/images/carousel/carrousel2.jpg",
@@ -428,7 +429,7 @@ export default function MainPage() {
               { icon: Search, label: "Search" },
               { icon: ShoppingBag, label: "Cart" },
             ].map(({ icon: Icon, label }) => (
-              <button key={label} aria-label={label} className={styles.headerButton} style={{ outline: "none" }}>
+              <button key={label} aria-label={label} className={styles.headerButton} style={{ outline: "none" }}onClick={label === "Cart" ? () => navigate("/carrito") : undefined}>
                 <Icon size={20} />
               </button>
             ))}
