@@ -1,0 +1,224 @@
+.cartItem {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.cartItem:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 640px) {
+  .cartItem {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+.productImage {
+  position: relative;
+  width: 180px;
+  height: 200px;
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.cartItem:hover .productImage {
+  border-color: var(--primary);
+}
+
+.imageElement {
+  border-radius: 0.5rem;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* Heart icon positioned in top-left corner of product image */
+.heartIcon {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: white;
+  backdrop-filter: blur(8px);
+  padding: 0.375rem;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #6b7280;
+}
+
+.heartIcon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.heartIcon:active {
+  transform: scale(0.95);
+}
+
+/* Show heart icon on cart item hover */
+.cartItem:hover .heartIcon {
+  opacity: 1;
+}
+
+.productDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.productHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.productName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.productPrice {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.productInfo {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.infoRow {
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoLabel {
+  color: var(--text-secondary);
+  min-width: 60px;
+}
+
+.infoValue {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  background-color: var(--bg-primary);
+  width: fit-content;
+}
+
+.quantityButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: var(--bg-primary);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.quantityButton:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.quantityDisplay {
+  width: 40px;
+  height: 32px;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-left: 1px solid var(--border-primary);
+  border-right: 1px solid var(--border-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .productImage {
+    width: 150px;
+    height: 170px;
+  }
+}
+
+@media (max-width: 640px) {
+  .productImage {
+    width: 120px;
+    height: 140px;
+    margin: 0 auto;
+  }
+
+  .productDetails {
+    text-align: center;
+  }
+
+  .heartIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.25rem;
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+
+  .quantityControls {
+    justify-content: center;
+    margin: 0 auto;
+  }
+}

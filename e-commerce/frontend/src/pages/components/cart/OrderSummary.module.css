@@ -1,0 +1,136 @@
+/* Order Summary */
+.orderSummary {
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.summaryContent {
+  width: 100%;
+}
+
+.discountsSection {
+  margin-bottom: 1.5rem;
+}
+
+.discountsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.discountsTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addButton {
+  background: none;
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addButton:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.orderDetails {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  padding-bottom: 2rem;
+}
+
+.orderRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.orderRow span:last-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.totalSection {
+  border-top: 1px solid var(--border-primary);
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkoutButton {
+  width: 100%;
+  background-color: #000000;
+  color: white;
+  padding: 0.875rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.checkoutButton:hover {
+  background-color: #333333;
+}
+
+.loginButton {
+  width: 100%;
+  background-color: transparent;
+  color: var(--text-secondary);
+  padding: 0.875rem;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.loginButton:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .orderSummary {
+    padding: 1rem;
+  }
+}

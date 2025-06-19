@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { ThemeProvider } from "./pages/context/themeContext"
 import Home from "./pages/Home/index"
+import Carrito from "./pages/Cart/index"
 import InicioSesion from "./pages/inicioSesion"
 import Registrarse from "./pages/signUp"
-import Carrito from "./pages/Carrito"
 import "./pages/styles/global.css"
 
 function App() {
