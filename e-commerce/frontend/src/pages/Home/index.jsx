@@ -57,10 +57,20 @@ export default function HomePage() {
           </div>
 
           <div className={sharedStyles.productsGrid}>
-            <ProductCard image="/images/TestImage.png" name="Camisa de Verano" price="$599" />
-            <ProductCard image="/images/TestImage.png" name="Zapatos Casuales" price="$1,299" />
-            <ProductCard image="/images/TestImage.png" name="Bufanda de Lino" price="$399" />
-            <ProductCard image="/images/TestImage.png" name="Pantalón Casual" price="$899" />
+            <ProductCard image="/images/TestImage.png" name="Camisa de Verano" price="$599" productId="camisa-verano" />
+            <ProductCard
+              image="/images/TestImage.png"
+              name="Zapatos Casuales"
+              price="$1,299"
+              productId="zapatos-casuales"
+            />
+            <ProductCard image="/images/TestImage.png" name="Bufanda de Lino" price="$399" productId="bufanda-lino" />
+            <ProductCard
+              image="/images/TestImage.png"
+              name="Pantalón Casual"
+              price="$899"
+              productId="pantalon-casual"
+            />
           </div>
         </div>
       </section>
