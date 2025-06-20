@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./ProductInfo.module.css"
@@ -14,7 +12,6 @@ export default function ProductInfo({ name, price, colors, sizes }) {
       alert("Por favor selecciona una talla")
       return
     }
-    // Aquí iría la lógica para agregar al carrito
     console.log("Agregando al carrito:", {
       name,
       price,
@@ -38,7 +35,7 @@ export default function ProductInfo({ name, price, colors, sizes }) {
               onClick={() => setSelectedColor(index)}
               className={`${styles.colorOption} ${index === selectedColor ? styles.colorOptionSelected : ""}`}
             >
-              <img src={color.image || "/placeholder.svg"} alt={color.name} />
+              <img src={color.image || "/placeholder-image.png"} alt={color.name} />
             </button>
           ))}
         </div>
@@ -50,11 +47,15 @@ export default function ProductInfo({ name, price, colors, sizes }) {
         <div className={styles.sizeOptions}>
           {sizes.map((size) => (
             <button
-              key={size}
-              onClick={() => setSelectedSize(size)}
-              className={`${styles.sizeOption} ${selectedSize === size ? styles.sizeOptionSelected : ""}`}
+              key={size.value}
+              onClick={() => size.available && setSelectedSize(size.value)}
+              className={`${styles.sizeOption} ${
+                selectedSize === size.value ? styles.sizeOptionSelected : ""
+              } ${!size.available ? styles.sizeOptionUnavailable : ""}`}
+              disabled={!size.available}
             >
-              {size}
+              {size.value}
+              {!size.available && <span className={styles.unavailableLine}></span>}
             </button>
           ))}
         </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import { useParams, useNavigate } from "react-router-dom"
 import { useTheme } from "../context/themeContext"
 import Header from "../components/layout/Header"
@@ -10,23 +12,25 @@ export default function ProductoDetallePage() {
   const { productId } = useParams()
   const navigate = useNavigate()
 
-  // Mock product data - en una app real vendría de una API
+  // Mock product data - exactamente como en la imagen de referencia
   const productData = {
     "camisa-verano": {
       name: "PLAYERA POLO SLIM FIT TEXTURIZADA",
       price: 499.0,
-      images: [
-        "/placeholder.svg?height=600&width=500",
-        "/placeholder.svg?height=600&width=500",
-        "/placeholder.svg?height=600&width=500",
-      ],
+      images: ["/placeholder-image.png"],
       colors: [
-        { name: "Verde Olivo", value: "#8B9A6B", image: "/placeholder.svg?height=100&width=100" },
-        { name: "Camel", value: "#C19A6B", image: "/placeholder.svg?height=100&width=100" },
-        { name: "Gris", value: "#6B7280", image: "/placeholder.svg?height=100&width=100" },
-        { name: "Blanco", value: "#FFFFFF", image: "/placeholder.svg?height=100&width=100" },
+        { name: "Verde Olivo", value: "#8B9A6B", image: "../images/productImagesTest/Polo1.png" },
+        { name: "Camel", value: "#C19A6B", image: "../images/productImagesTest/Polo2.png" },
+        { name: "Gris", value: "#6B7280", image: "../images/productImagesTest/Polo3.png" },
+        { name: "Blanco", value: "#FFFFFF", image: "../images/productImagesTest/Polo4.png" },
       ],
-      sizes: ["XCH", "S", "M", "XG", "XXG"],
+      sizes: [
+        { value: "XCH", available: true },
+        { value: "S", available: false }, // Talla tachada
+        { value: "M", available: true },
+        { value: "XG", available: true },
+        { value: "XXG", available: true },
+      ],
     },
   }
 

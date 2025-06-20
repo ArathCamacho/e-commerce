@@ -1,4 +1,4 @@
-/* Variables CSS para el sistema de themes */
+/* Variables CSS para el sistema de temas */
 :root {
   /* Colores principales */
   --primary: #a9bfa2;
@@ -20,15 +20,15 @@
   --border-primary: #e5e7eb;
   --border-secondary: #d1d5db;
 
+  /* Estados */
+  --hover-overlay: rgba(0, 0, 0, 0.05);
+  --active-overlay: rgba(0, 0, 0, 0.1);
+
   /* Sombras */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-  /* Estados */
-  --hover-overlay: rgba(0, 0, 0, 0.05);
-  --active-overlay: rgba(0, 0, 0, 0.1);
 }
 
 .dark {
@@ -53,6 +53,19 @@
   --active-overlay: rgba(255, 255, 255, 0.1);
 
   --primary-light: #8da776;
+}
+
+/* Dark mode: bordes blancos para elementos seleccionados */
+.dark .colorOptionSelected {
+  border-color: #ffffff !important;
+  border-width: 2px;
+}
+
+.dark .sizeOptionSelected {
+  border-color: #ffffff !important;
+  border-width: 2px;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
 }
 
 * {
@@ -141,4 +154,37 @@ html {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
+}
+
+/* Animaciones de /components/home/Hero.jsx */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+@keyframes subtleParallax {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.02) translateY(-10px);
+  }
+}
+.animate-subtle-parallax {
+  animation: subtleParallax 20s ease-in-out infinite;
+}
+.text-shadow-lg {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
