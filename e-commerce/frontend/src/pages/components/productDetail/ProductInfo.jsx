@@ -1,31 +1,24 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import styles from "./ProductInfo.module.css"
+import { useState } from "react";
+import styles from "./ProductInfo.module.css";
 
 export default function ProductInfo({ name, price, colors, sizes }) {
-  const [selectedColor, setSelectedColor] = useState(0)
-  const [selectedSize, setSelectedSize] = useState("")
-  const navigate = useNavigate()
+  const [selectedColor, setSelectedColor] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Por favor selecciona una talla")
-      return
+      alert("Por favor selecciona una talla");
+      return;
     }
-    console.log("Agregando al carrito:", {
-      name,
-      price,
-      color: colors[selectedColor],
-      size: selectedSize,
-    })
-  }
+    alert(`Producto agregado:\n${name}\nColor: ${colors[selectedColor].name}\nTalla: ${selectedSize}\nPrecio: $${price.toFixed(2)}`);
+    // Aquí se puede agregar lógica para llamar API y agregar al carrito
+  };
 
   return (
     <div className={styles.productInfo}>
       <h1 className={styles.productName}>{name}</h1>
       <p className={styles.productPrice}>${price.toFixed(2)}</p>
 
-      {/* Color Selection */}
       <div className={styles.colorSection}>
         <h3 className={styles.sectionTitle}>Color: {colors[selectedColor].name}</h3>
         <div className={styles.colorOptions}>
@@ -41,7 +34,6 @@ export default function ProductInfo({ name, price, colors, sizes }) {
         </div>
       </div>
 
-      {/* Size Selection */}
       <div className={styles.sizeSection}>
         <h3 className={styles.sectionTitle}>SELECCIONE LA TALLA</h3>
         <div className={styles.sizeOptions}>
@@ -62,10 +54,9 @@ export default function ProductInfo({ name, price, colors, sizes }) {
         <button className={styles.sizeGuideButton}>GUÍA DE TALLAS</button>
       </div>
 
-      {/* Add to Cart Button */}
       <button onClick={handleAddToCart} className={styles.addToCartButton}>
         AGREGAR
       </button>
     </div>
-  )
+  );
 }
