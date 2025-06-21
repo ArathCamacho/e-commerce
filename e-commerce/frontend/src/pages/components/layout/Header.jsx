@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTheme } from "../../context/themeContext"
@@ -10,7 +12,36 @@ export default function Header() {
   const [scrollY, setScrollY] = useState(0)
   const [scrollDirection, setScrollDirection] = useState("none")
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [cartItemCount, setCartItemCount] = useState(0)
   const navigate = useNavigate()
+
+  // Obtener session ID
+  const getSessionId = () => {
+    return localStorage.getItem("cart_session_id") || ""
+  }
+
+  // Cargar contador del carrito
+  const loadCartCount = async () => {
+    const sessionId = getSessionId()
+    if (!sessionId) {
+      setCartItemCount(0)
+      return
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3001/api/carrito/${sessionId}`)
+      if (response.ok) {
+        const items = await response.json()
+        const totalItems = items.reduce((total, item) => total + item.quantity, 0)
+        setCartItemCount(totalItems)
+      } else {
+        setCartItemCount(0)
+      }
+    } catch (error) {
+      console.error("Error al cargar contador del carrito:", error)
+      setCartItemCount(0)
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +60,19 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [lastScrollY])
+
+  useEffect(() => {
+    // Cargar contador inicial
+    loadCartCount()
+
+    // Escuchar eventos de actualización del carrito
+    const handleCartUpdate = () => {
+      loadCartCount()
+    }
+
+    window.addEventListener("cartUpdated", handleCartUpdate)
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate)
+  }, [])
 
   const getHeaderOpacity = () => {
     const maxScroll = 150
@@ -80,7 +124,6 @@ export default function Header() {
           {[
             { icon: Heart, label: "Wishlist" },
             { icon: Search, label: "Search" },
-            { icon: ShoppingBag, label: "Cart", onClick: () => navigate("/carrito") },
           ].map(({ icon: Icon, label, onClick }) => (
             <button
               key={label}
@@ -92,6 +135,23 @@ export default function Header() {
               <Icon size={20} />
             </button>
           ))}
+
+          {/* Botón del carrito con contador */}
+          <button
+            aria-label="Cart"
+            className={`${styles.headerButton} ${styles.cartButton}`}
+            style={{ outline: "none" }}
+            onClick={() => navigate("/carrito")}
+          >
+            <div className={styles.cartIconContainer}>
+              <ShoppingBag size={20} />
+              {cartItemCount > 0 && (
+                <div className={styles.cartBadge}>
+                  <span className={styles.cartBadgeText}>{cartItemCount > 99 ? "99+" : cartItemCount}</span>
+                </div>
+              )}
+            </div>
+          </button>
 
           <UserDropdown />
 
