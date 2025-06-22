@@ -1,0 +1,29 @@
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoText {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+
+.emptyText {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  font-style: italic;
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* Dark mode adjustments */
+.dark .infoText {
+  color: var(--text-secondary);
+}
+
+.dark .emptyText {
+  color: var(--text-quaternary);
+}

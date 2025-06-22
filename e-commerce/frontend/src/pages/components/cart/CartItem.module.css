@@ -27,7 +27,7 @@
   width: 180px;
   height: 200px;
   background-color: var(--bg-secondary);
-  border-radius: 0.5rem;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@
 }
 
 .imageElement {
-  border-radius: 0.5rem;
+  border-radius: 0;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -188,6 +188,35 @@
   color: var(--text-primary);
   border-left: 1px solid var(--border-primary);
   border-right: 1px solid var(--border-primary);
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.removeButton:focus,
+.removeButton:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Dark mode específico para el botón de eliminar */
+.dark .removeButton {
+  color: var(--text-primary);
 }
 
 /* Responsive adjustments */

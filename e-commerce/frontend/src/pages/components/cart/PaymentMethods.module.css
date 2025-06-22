@@ -3,41 +3,16 @@
   gap: 0.5rem;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0.5rem 0;
 }
 
-.paymentCard {
-  width: 36px;
-  height: 22px;
-  border-radius: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.6rem;
-  font-weight: bold;
-  transition: transform 0.2s ease;
+.giftLogo {
+  color: currentColor;
+  transition: all 0.5s ease;
 }
 
-.paymentCard:hover {
-  transform: scale(1.05);
-}
 
-.visa {
-  background-color: #1a1f71;
-}
-
-.mastercard {
-  background-color: #eb001b;
-}
-
-.amex {
-  background-color: #006fcf;
-}
-
-.paypal {
-  background-color: #003087;
-}
-
-.oxxo {
-  background-color: #000;
+/* Dark mode: gift card icon follows the same pattern as header icons */
+.dark .giftLogo {
+  color: var(--text-primary);
 }

@@ -1,0 +1,137 @@
+.confirmationModal {
+  width: 100%;
+  max-width: 400px;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+.body {
+  margin-bottom: 2rem;
+}
+
+.message {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.cancelButton,
+.confirmButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cancelButton {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.cancelButton:hover {
+  background-color: var(--hover-overlay);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+}
+
+.confirmButton {
+  color: white;
+  font-weight: 600;
+}
+
+.confirmButton.default {
+  background-color: var(--primary);
+}
+
+.confirmButton.default:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.confirmButton.danger {
+  background-color: #ef4444;
+}
+
+.confirmButton.danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.confirmButton.warning {
+  background-color: #f59e0b;
+}
+
+.confirmButton.warning:hover {
+  background-color: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.cancelButton:active,
+.confirmButton:active {
+  transform: translateY(0);
+}
+
+/* Dark mode adjustments */
+.dark .cancelButton {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.dark .cancelButton:hover {
+  background-color: var(--hover-overlay);
+  color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .content {
+    padding: 1.5rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cancelButton,
+  .confirmButton {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .confirmationModal {
+    max-width: 320px;
+  }
+}

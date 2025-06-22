@@ -1,4 +1,4 @@
-.orderSummary {
+.checkoutSummary {
   background-color: var(--bg-secondary);
   padding: 2rem;
   border-radius: 0.5rem;
@@ -8,6 +8,8 @@
   transition: all 0.3s ease;
   width: 100%;
   max-width: 400px;
+  position: sticky;
+  top: 2rem;
 }
 
 .summaryContent {
@@ -97,7 +99,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -105,27 +107,6 @@
 
 .checkoutButton:hover {
   background-color: #333333;
-}
-
-.loginButton {
-  width: 100%;
-  background-color: transparent;
-  color: var(--text-secondary);
-  padding: 1rem;
-  border: 1px solid var(--border-primary);
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-bottom: 2rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.loginButton:hover {
-  border-color: var(--primary);
-  color: var(--primary);
 }
 
 /* Dark mode adjustments */
@@ -139,15 +120,21 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .orderSummary {
-    padding: 1.5rem;
+@media (max-width: 1024px) {
+  .checkoutSummary {
+    position: static;
     max-width: 100%;
   }
 }
 
+@media (max-width: 768px) {
+  .checkoutSummary {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 640px) {
-  .orderSummary {
+  .checkoutSummary {
     padding: 1rem;
   }
 

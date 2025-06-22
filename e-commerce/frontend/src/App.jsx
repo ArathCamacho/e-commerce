@@ -5,6 +5,7 @@ import Carrito from "./pages/Cart/index"
 import InicioSesion from "./pages/inicioSesion"
 import Registrarse from "./pages/signUp"
 import ProductDetail from "./pages/ProductDetail/index"
+import Checkout from "./pages/Checkout/index"
 import "./pages/styles/global.css"
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/register" element={<Registrarse />} />
           <Route path="/principal" element={<Home />} />
           <Route path="/carrito" element={<Carrito />} />
+           <Route path="/checkout" element={<Checkout />} />
           <Route path="/producto/:productId" element={<ProductDetail />} />
         </Routes>
       </Router>
