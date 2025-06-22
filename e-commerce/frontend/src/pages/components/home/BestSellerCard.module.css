@@ -1,7 +1,6 @@
 .bestSellerCard {
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: 0.75rem;
   overflow: hidden;
 }
 
@@ -13,14 +12,12 @@
   position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  border-radius: 0.75rem;
   background-color: var(--bg-tertiary);
   margin-bottom: 0.75rem;
   transition: all 0.3s ease;
   border: 1px solid var(--border-primary);
 }
 
-/* Quitar la sombra del hover y solo mantener transform sutil */
 .bestSellerCard:hover .bestSellerImageContainer {
   transform: scale(1.02);
   border-color: var(--primary);
@@ -46,9 +43,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos del wishlist button integrados */
@@ -59,12 +54,10 @@
   background-color: white;
   backdrop-filter: blur(8px);
   padding: 0.5rem;
-  border-radius: 50%;
   opacity: 0;
   transition: all 0.3s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
@@ -75,7 +68,6 @@
 
 .wishlistButton:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-color: #ef4444;
 }
 
@@ -86,7 +78,6 @@
 .wishlistButton:focus,
 .wishlistButton:active {
   outline: none !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 .wishlistIcon {

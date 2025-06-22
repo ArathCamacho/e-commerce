@@ -4,20 +4,18 @@
   align-items: center;
   text-align: center;
   padding: 1.5rem;
-  border-radius: 0.75rem;
 }
 
 .featureIcon {
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
   color: white;
-  box-shadow: var(--shadow-md);
+  border-radius:  50%;
 }
 
 .featureIconSvg {

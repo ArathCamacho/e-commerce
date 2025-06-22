@@ -118,7 +118,12 @@ export default function CarritoPage() {
   }, [])
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = 140.0
+
+  // Lógica de envío gratis después de $800
+  const FREE_SHIPPING_THRESHOLD = 800
+  const SHIPPING_COST = 140.0
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
+
   const total = subtotal + shipping
 
   if (!mounted) {
@@ -129,7 +134,7 @@ export default function CarritoPage() {
     return (
       <div className={`${sharedStyles.container} ${darkMode ? sharedStyles.dark : ""}`}>
         <Header />
-        <main className={sharedStyles.mainContent}>
+        <main className={sharedStyles.mainContent} style={{ paddingTop: "5rem" }}>
           <div className={sharedStyles.sectionContainer}>
             <p>Cargando carrito...</p>
           </div>
@@ -142,7 +147,7 @@ export default function CarritoPage() {
     <div className={`${sharedStyles.container} ${darkMode ? sharedStyles.dark : ""}`}>
       <Header />
 
-      <main className={sharedStyles.mainContent}>
+      <main className={sharedStyles.mainContent} style={{ paddingTop: "5rem" }}>
         <div className={sharedStyles.sectionContainer}>
           <h1 className={sharedStyles.pageTitle}>BOLSA DE COMPRAS</h1>
 
@@ -163,7 +168,12 @@ export default function CarritoPage() {
               </div>
 
               {/* Order Summary */}
-              <OrderSummary subtotal={subtotal} shipping={shipping} total={total} />
+              <OrderSummary
+                subtotal={subtotal}
+                shipping={shipping}
+                total={total}
+                freeShippingThreshold={FREE_SHIPPING_THRESHOLD}
+              />
             </div>
           )}
         </div>

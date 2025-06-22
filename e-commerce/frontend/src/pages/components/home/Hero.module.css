@@ -3,7 +3,6 @@
   position: relative;
   height: 500px;
   overflow: hidden;
-  border-radius: 0 0;
   margin-bottom: 2rem;
 }
 
@@ -33,13 +32,11 @@
   transform: scale(1.1);
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
-  animation: subtleParallax 20s ease-in-out infinite;
 }
 
 .carouselImageActive {
   opacity: 1;
   transform: scale(1);
-  animation: subtleParallax 20s ease-in-out infinite;
 }
 
 .carouselImageTransition {
@@ -64,12 +61,9 @@
   font-weight: 700;
   margin-bottom: 1rem;
   animation: fadeInUp 0.8s ease-out forwards;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 2px;
   position: relative;
 }
-
-/* Quito el efecto shine del título */
 
 .heroSubtitle {
   font-size: 1.125rem;
@@ -78,7 +72,6 @@
   animation: fadeInUp 0.8s ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   line-height: 1.6;
 }
 
@@ -97,18 +90,15 @@
   backdrop-filter: blur(12px);
   color: white;
   padding: 0.875rem 2.5rem;
-  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .heroButton:hover {
   background-color: rgb(255, 255, 255);
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
   color: #a9bfa2;
 }
@@ -124,16 +114,32 @@
   letter-spacing: 0.5px;
 }
 
+.heroButton {
+  overflow: hidden; 
+}
+
 .heroButtonShine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-  transform: translateX(-100%);
-  transition: transform 0.7s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: 
+  opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: pulseGlow 3s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.3; transform: scale(0.98); }
+  100% { opacity: 0.7; transform: scale(1.02); }
 }
 
 .heroButton:hover .heroButtonShine {
-  transform: translateX(100%);
+  animation: none;
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 /* Animaciones */
@@ -145,16 +151,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes subtleParallax {
-  0%,
-  100% {
-    transform: scale(1) translateY(0);
-  }
-  50% {
-    transform: scale(1.02) translateY(-10px);
   }
 }
 

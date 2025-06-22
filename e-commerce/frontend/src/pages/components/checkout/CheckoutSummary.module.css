@@ -55,6 +55,66 @@
   color: var(--primary);
 }
 
+/* Estilos para el mensaje de envío gratis */
+.freeShippingMessage {
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.freeShippingText {
+  font-size: 0.875rem;
+  color: #92400e;
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background-color: #fde68a;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.freeShippingEarned {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-left: 3px solid #10b981;
+}
+
+.freeShippingEarnedText {
+  font-size: 0.875rem;
+  color: #065f46;
+  margin: 0 0 0.25rem 0;
+  text-align: center;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+
+.freeShippingSubtext {
+  font-size: 0.75rem;
+  color: #047857;
+  margin: 0;
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 400;
+}
+
 .orderDetails {
   font-size: 0.875rem;
   color: var(--text-secondary);
@@ -71,6 +131,11 @@
 .orderRow span:last-child {
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.freeShippingPrice {
+  color: #10b981 !important;
+  font-weight: 700 !important;
 }
 
 .totalSection {
@@ -119,6 +184,33 @@
   background-color: #e5e5e5;
 }
 
+.dark .freeShippingMessage {
+  background-color: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.dark .freeShippingText {
+  color: #fbbf24;
+}
+
+.dark .progressBar {
+  background-color: rgba(245, 158, 11, 0.25);
+}
+
+.dark .freeShippingEarned {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  border-left-color: #10b981;
+}
+
+.dark .freeShippingEarnedText {
+  color: #34d399;
+}
+
+.dark .freeShippingSubtext {
+  color: #6ee7b7;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .checkoutSummary {
@@ -144,5 +236,17 @@
 
   .totalRow {
     font-size: 1rem;
+  }
+
+  .freeShippingText {
+    font-size: 0.8125rem;
+  }
+
+  .freeShippingEarnedText {
+    font-size: 0.8125rem;
+  }
+
+  .freeShippingSubtext {
+    font-size: 0.6875rem;
   }
 }

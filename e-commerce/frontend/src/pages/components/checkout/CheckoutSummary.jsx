@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import PaymentMethods from "../cart/PaymentMethods"
 import styles from "./CheckoutSummary.module.css"
 
-export default function CheckoutSummary({ subtotal, shipping, total, cartItems }) {
+export default function CheckoutSummary({ subtotal, shipping, total, cartItems, freeShippingThreshold = 800 }) {
   const navigate = useNavigate()
 
   const handleContinuePurchase = () => {
@@ -19,6 +19,10 @@ export default function CheckoutSummary({ subtotal, shipping, total, cartItems }
     console.log("Agregar descuento")
   }
 
+  // Calcular cuánto falta para envío gratis
+  const amountForFreeShipping = Math.max(0, freeShippingThreshold - subtotal)
+  const hasEarnedFreeShipping = subtotal >= freeShippingThreshold
+
   return (
     <div className={styles.checkoutSummary}>
       <div className={styles.summaryContent}>
@@ -30,14 +34,41 @@ export default function CheckoutSummary({ subtotal, shipping, total, cartItems }
             </button>
           </div>
 
+          {/* Mensaje de envío gratis */}
+          {!hasEarnedFreeShipping && amountForFreeShipping > 0 && (
+            <div className={styles.freeShippingMessage}>
+              <p className={styles.freeShippingText}>
+                ¡Agrega <strong>${amountForFreeShipping.toFixed(2)}</strong> más para obtener{" "}
+                <strong>envío gratis</strong>!
+              </p>
+              <div className={styles.progressBar}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
+
+          {hasEarnedFreeShipping && (
+            <div className={styles.freeShippingEarned}>
+              <p className={styles.freeShippingEarnedText}>
+                <strong>Envío sin costo incluido</strong>
+              </p>
+              <p className={styles.freeShippingSubtext}>Tu pedido califica para envío gratuito</p>
+            </div>
+          )}
+
           <div className={styles.orderDetails}>
             <div className={styles.orderRow}>
               <span>Valor del pedido</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className={styles.orderRow}>
-              <span>Costo estimado de envío</span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>Costo de envío</span>
+              <span className={shipping === 0 ? styles.freeShippingPrice : ""}>
+                {shipping === 0 ? "GRATIS" : `$${shipping.toFixed(2)}`}
+              </span>
             </div>
           </div>
 

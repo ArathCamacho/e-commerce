@@ -2,6 +2,23 @@
 
 import { useState, useEffect } from "react"
 import styles from "./ProductInfo.module.css"
+import NotificationToast from "../ui/NotificationToast"
+
+const ExclamationIcon = ({ size = 16, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+)
 
 export default function ProductInfo({
   name,
@@ -18,6 +35,23 @@ export default function ProductInfo({
   const [selectedVariantStock, setSelectedVariantStock] = useState(0)
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [showSizeError, setShowSizeError] = useState(false)
+  const [notifications, setNotifications] = useState([])
+
+  const showSuccess = (message) => {
+    const id = Date.now()
+    setNotifications((prev) => [...prev, { id, message, type: "success", isVisible: true }])
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id))
+    }, 4000)
+  }
+
+  const showError = (message) => {
+    const id = Date.now()
+    setNotifications((prev) => [...prev, { id, message, type: "error", isVisible: true }])
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id))
+    }, 4000)
+  }
 
   // Generar o obtener session ID
   const getSessionId = () => {
@@ -74,18 +108,36 @@ export default function ProductInfo({
     setShowSizeError(false) // Ocultar error cuando se selecciona una talla
   }
 
-  const handleAddToCart = async () => {
-    if (!selectedSize) {
-      setShowSizeError(true)
+  const handleAddToCart = async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    console.log("handleAddToCart called") // Debug
+    console.log("selectedSize:", selectedSize) // Debug
+    console.log("showSizeError before:", showSizeError) // Debug
+
+    // Verificar si no hay talla seleccionada
+    if (!selectedSize || selectedSize.trim() === "") {
+      console.log("No size selected, showing error") // Debug
+      setShowSizeError(true) // Activar el estado de error visual
+
+      // Forzar re-render
+      setTimeout(() => {
+        console.log("showSizeError after timeout:", showSizeError) // Debug
+      }, 100)
+
+      showError("Por favor selecciona una talla antes de agregar el producto al carrito")
       return
     }
 
     if (selectedVariantStock === 0) {
-      alert("Este producto no tiene stock disponible")
+      console.log("No stock available") // Debug
+      showError("Sin stock disponible para esta talla")
       return
     }
 
     setIsAddingToCart(true)
+    console.log("Starting to add to cart") // Debug
 
     try {
       const colorSeleccionado = colors[selectedColorIndex]
@@ -102,7 +154,7 @@ export default function ProductInfo({
         sesion_id: sessionId,
       }
 
-      console.log("Enviando al carrito:", cartData)
+      console.log("Enviando al carrito:", cartData) // Debug
 
       const response = await fetch("http://localhost:3001/api/carrito", {
         method: "POST",
@@ -113,23 +165,25 @@ export default function ProductInfo({
       })
 
       const result = await response.json()
+      console.log("Response from server:", result) // Debug
 
       if (response.ok) {
-        alert(`¡Producto agregado al carrito!\n\n${name}\nColor: ${colorSeleccionado.name}\nTalla: ${selectedSize}`)
+        console.log("Success! Showing toast") // Debug
+        showSuccess("¡Producto agregado al carrito exitosamente!")
 
         // Emitir evento para actualizar contador del carrito
         window.dispatchEvent(new CustomEvent("cartUpdated"))
+        console.log("Cart updated event dispatched") // Debug
       } else {
-        alert(`Error: ${result.error}`)
-        if (result.stockDisponible !== undefined) {
-          console.log("Stock disponible:", result.stockDisponible)
-        }
+        console.log("Error response:", result) // Debug
+        showError(result.error || "No se pudo agregar el producto al carrito")
       }
     } catch (error) {
       console.error("Error al agregar al carrito:", error)
-      alert("Error al agregar el producto al carrito. Inténtalo de nuevo.")
+      showError("Error de conexión. No se pudo conectar con el servidor.")
     } finally {
       setIsAddingToCart(false)
+      console.log("Add to cart process finished") // Debug
     }
   }
 
@@ -157,15 +211,10 @@ export default function ProductInfo({
 
       <div className={styles.sizeSection}>
         <div className={styles.sizeHeader}>
-          <h3 className={styles.sectionTitle}>
+          <h3 className={`${styles.sectionTitle} ${showSizeError ? styles.sectionTitleError : ""}`}>
+            {showSizeError && <ExclamationIcon size={16} className={styles.errorIcon} />}
             {selectedSize ? `Talla seleccionada: ${selectedSize}` : "SELECCIONE LA TALLA"}
           </h3>
-          {showSizeError && (
-            <div className={styles.sizeError}>
-              <span className={styles.errorIcon}>⚠</span>
-              <span>Selecciona una talla</span>
-            </div>
-          )}
         </div>
 
         <div className={styles.sizeOptions}>
@@ -197,10 +246,23 @@ export default function ProductInfo({
       <button
         onClick={handleAddToCart}
         className={styles.addToCartButton}
-        disabled={!selectedSize || selectedVariantStock === 0 || isAddingToCart}
+        disabled={(selectedVariantStock === 0 && selectedSize) || isAddingToCart}
       >
         {isAddingToCart ? "AGREGANDO..." : selectedVariantStock === 0 && selectedSize ? "SIN STOCK" : "AGREGAR"}
       </button>
+
+      {/* Notificaciones */}
+      <div style={{ position: "fixed", top: "20px", right: "20px", zIndex: 9999 }}>
+        {notifications.map((notification) => (
+          <NotificationToast
+            key={notification.id}
+            message={notification.message}
+            type={notification.type}
+            isVisible={notification.isVisible}
+            onClose={() => setNotifications((prev) => prev.filter((n) => n.id !== notification.id))}
+          />
+        ))}
+      </div>
     </div>
   )
 }

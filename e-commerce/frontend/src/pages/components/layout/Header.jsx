@@ -10,8 +10,6 @@ import styles from "./Header.module.css"
 export default function Header() {
   const { darkMode, toggleDarkMode } = useTheme()
   const [scrollY, setScrollY] = useState(0)
-  const [scrollDirection, setScrollDirection] = useState("none")
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [cartItemCount, setCartItemCount] = useState(0)
   const navigate = useNavigate()
 
@@ -45,21 +43,12 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-
-      if (currentScrollY > lastScrollY) {
-        setScrollDirection("down")
-      } else if (currentScrollY < lastScrollY) {
-        setScrollDirection("up")
-      }
-
-      setLastScrollY(currentScrollY)
-      setScrollY(currentScrollY)
+      setScrollY(window.scrollY)
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   useEffect(() => {
     // Cargar contador inicial
@@ -74,29 +63,28 @@ export default function Header() {
     return () => window.removeEventListener("cartUpdated", handleCartUpdate)
   }, [])
 
+  // Calcular opacidad del header basado en scroll
   const getHeaderOpacity = () => {
-    const maxScroll = 150
-    const minOpacity = 0.85
-    const maxOpacity = 1
+    const startFade = 100 // Empezar a desvanecer después de 100px
+    const minOpacity = 0.3 // Opacidad mínima del 30%
 
-    if (scrollDirection === "down" && scrollY > 50) {
-      const opacity = Math.max(minOpacity, maxOpacity - (scrollY / maxScroll) * 0.15)
-      return opacity
-    } else if (scrollDirection === "up" || scrollY <= 50) {
-      const opacity = Math.min(maxOpacity, minOpacity + ((maxScroll - scrollY) / maxScroll) * 0.15)
-      return opacity
+    if (scrollY <= startFade) {
+      return 1
     }
 
-    return maxOpacity
+    const fadeRange = 200 // Rango de desvanecimiento
+    const fadeProgress = Math.min((scrollY - startFade) / fadeRange, 1)
+    return Math.max(minOpacity, 1 - fadeProgress * 0.7) // Reducir hasta 30%
   }
 
   return (
     <header
       className={styles.header}
       style={{
+        opacity: getHeaderOpacity(),
         backgroundColor: darkMode
-          ? `rgba(23, 23, 23, ${getHeaderOpacity()})`
-          : `rgba(255, 255, 255, ${getHeaderOpacity()})`,
+          ? `rgba(23, 23, 23, ${getHeaderOpacity() * 0.95})`
+          : `rgba(255, 255, 255, ${getHeaderOpacity() * 0.95})`,
         backdropFilter: "blur(8px)",
       }}
     >
@@ -122,8 +110,8 @@ export default function Header() {
 
         <div className={styles.headerActions}>
           {[
-            { icon: Heart, label: "Wishlist" },
-            { icon: Search, label: "Search" },
+            { icon: Heart, label: "Wishlist", onClick: () => navigate("/wishlist") },
+            { icon: Search, label: "Search", onClick: () => navigate("/search") },
           ].map(({ icon: Icon, label, onClick }) => (
             <button
               key={label}

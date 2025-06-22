@@ -31,10 +31,9 @@
 .newsletterIcon {
   width: 3rem;
   height: 3rem;
-  margin: 0 auto 1.5rem auto; /* Centrado con margin auto */
-  display: block; /* Asegurar que sea block para centrado */
+  margin: 0 auto 1.5rem auto;
+  display: block;
   opacity: 0.9;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .newsletterTitle {
@@ -65,7 +64,6 @@
   flex-grow: 1;
   padding: 0.875rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
   font-size: 1rem;
@@ -82,7 +80,6 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .newsletterButton {
@@ -91,17 +88,14 @@
   color: var(--primary-dark);
   font-weight: 600;
   border: none;
-  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .newsletterButton:hover {
   background-color: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .newsletterButton:active {
@@ -120,10 +114,10 @@
   }
 
   .newsletterInput {
-    border-radius: 0.5rem 0 0 0.5rem;
+    border-radius: 0;
   }
 
   .newsletterButton {
-    border-radius: 0 0.5rem 0.5rem 0;
+    border-radius: 0;
   }
 }

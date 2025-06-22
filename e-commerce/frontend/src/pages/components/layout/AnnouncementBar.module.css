@@ -1,9 +1,17 @@
 /* Announcement Bar */
 .announcementBar {
+  position: fixed;
+  top: 4rem; /* Debajo del header */
+  left: 0;
+  right: 0;
   background: linear-gradient(90deg, var(--primary), var(--primary-dark));
   color: white;
   padding: 0.5rem 0;
   overflow: hidden;
+  z-index: 40;
+  height: 2.5rem;
+  transition: opacity 0.3s ease;
+  width: 100%;
 }
 
 .announcementScroll {

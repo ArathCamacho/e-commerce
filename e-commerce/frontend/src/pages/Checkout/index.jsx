@@ -1,9 +1,26 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "../components/layout/Header"
 import CheckoutForm from "../components/checkout/CheckoutForm"
 import CheckoutSummary from "../components/checkout/CheckoutSummary"
 import styles from "../styles/CheckoutGeneral.module.css"
+
+const ArrowLeft = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className={className}
+  >
+    <path d="m12 19-7-7 7-7" />
+    <path d="m19 12H5" />
+  </svg>
+)
 
 export default function Checkout() {
   const navigate = useNavigate()
@@ -47,16 +64,21 @@ export default function Checkout() {
     loadCartItems()
   }, [])
 
-  // Calcular totales
+  // Calcular totales con envío gratis después de $800
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-  const shipping = 10.0 // Costo fijo de envío por ahora
+  const FREE_SHIPPING_THRESHOLD = 800
+  const SHIPPING_COST = 140.0
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
   const total = subtotal + shipping
 
   if (loading) {
     return (
       <div className={styles.container}>
         <Header />
-        <div className={styles.loadingContainer}>
+        <button onClick={() => navigate("/carrito")} className={styles.backButton} aria-label="Volver al carrito">
+          <ArrowLeft size={24} />
+        </button>
+        <div className={styles.loadingContainer} style={{ paddingTop: "5rem" }}>
           <div className={styles.loading}>Cargando...</div>
         </div>
       </div>
@@ -66,13 +88,22 @@ export default function Checkout() {
   return (
     <div className={styles.container}>
       <Header />
-      <main className={styles.mainContent}>
+      <button onClick={() => navigate("/carrito")} className={styles.backButton} aria-label="Volver al carrito">
+        <ArrowLeft size={24} />
+      </button>
+      <main className={styles.mainContent} style={{ paddingTop: "5rem" }}>
         <div className={styles.sectionContainer}>
           <h1 className={styles.pageTitle}>PROCESO DE COMPRA</h1>
 
           <div className={styles.checkoutLayout}>
             <CheckoutForm cartItems={cartItems} />
-            <CheckoutSummary subtotal={subtotal} shipping={shipping} total={total} cartItems={cartItems} />
+            <CheckoutSummary
+              subtotal={subtotal}
+              shipping={shipping}
+              total={total}
+              cartItems={cartItems}
+              freeShippingThreshold={FREE_SHIPPING_THRESHOLD}
+            />
           </div>
         </div>
       </main>
