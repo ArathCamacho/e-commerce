@@ -4,7 +4,8 @@ const path = require("path")
 
 const productRoutes = require("./routes/productRoutes")
 const authRoutes = require("./routes/authRoutes")
-const cartRoutes = require("./routes/cartRoutes") // ← AGREGAR
+const cartRoutes = require("./routes/cartRoutes")
+const checkoutRoutes = require("./routes/checkoutRoutes") // ← NUEVO
 
 const app = express()
 
@@ -17,7 +18,8 @@ app.use(express.json())
 // Rutas API
 app.use("/api", productRoutes)
 app.use("/api", authRoutes)
-app.use("/api", cartRoutes) // ← AGREGAR
+app.use("/api", cartRoutes)
+app.use("/api", checkoutRoutes) // ← NUEVO
 
 const PORT = 3001
 app.listen(PORT, () => {

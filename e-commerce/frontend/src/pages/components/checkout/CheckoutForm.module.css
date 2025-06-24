@@ -1,29 +1,67 @@
-.checkoutForm {
+.inlineForm {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.inlineForm input,
+.inlineForm select {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.inlineForm input:focus,
+.inlineForm select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.formButtons {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.infoText {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  margin: 0.25rem 0;
-  line-height: 1.4;
+.formButtons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
 }
 
-.emptyText {
-  color: var(--text-tertiary);
-  font-size: 0.875rem;
-  font-style: italic;
-  margin: 0.25rem 0;
-  line-height: 1.4;
+.formButtons button[type="submit"] {
+  background-color: #333;
+  color: white;
 }
 
-/* Dark mode adjustments */
-.dark .infoText {
-  color: var(--text-secondary);
+.formButtons button[type="submit"]:hover {
+  background-color: #555;
 }
 
-.dark .emptyText {
-  color: var(--text-quaternary);
+.formButtons button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.formButtons button[type="button"]:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .formButtons {
+    flex-direction: column;
+  }
+
+  .formButtons button {
+    width: 100%;
+  }
 }

@@ -1,6 +1,8 @@
+"use client"
 
 import { useState, useRef } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { useAuth } from "./context/AuthContext"
 import styles from "./styles/signup.module.css"
 import { useTheme } from "./context/themeContext"
 
@@ -37,6 +39,7 @@ export default function Registrarse() {
   const passwordRef = useRef(null)
   const navigate = useNavigate()
   const { darkMode, mounted } = useTheme()
+  const { login } = useAuth()
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -182,11 +185,11 @@ export default function Registrarse() {
 
       if (response.ok) {
         const data = await response.json()
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("user", JSON.stringify(data.user))
+        login(data.user, data.token) // Usar el contexto de autenticación
         navigate("/principal")
       } else {
-        throw new Error("Error al registrar usuario")
+        const errorData = await response.json()
+        setErrorMsg(errorData.error || "Error al registrar usuario")
       }
     } catch (error) {
       console.error(error)

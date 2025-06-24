@@ -1,12 +1,16 @@
+"use client"
+
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTheme } from "../../context/themeContext"
+import { useAuth } from "../../context/AuthContext"
 import { User } from "../home/Icons"
 import styles from "./userDropDown.module.css"
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false)
   const { darkMode } = useTheme()
+  const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
   const dropdownRef = useRef(null)
 
@@ -33,6 +37,18 @@ export default function UserDropdown() {
     navigate("/register")
   }
 
+  const handleLogout = () => {
+    setIsOpen(false)
+    logout()
+    navigate("/") // Redirigir al home después del logout
+  }
+
+  const handleProfile = () => {
+    setIsOpen(false)
+    // Aquí puedes agregar navegación a perfil cuando lo implementes
+    console.log("Ir a perfil")
+  }
+
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <button
@@ -51,31 +67,75 @@ export default function UserDropdown() {
       {isOpen && (
         <div className={`${styles.dropdownMenu} ${darkMode ? styles.dark : ""}`}>
           <div className={styles.dropdownHeader}>
-            <h3 className={styles.dropdownTitle}>Mi Cuenta</h3>
+            <h3 className={styles.dropdownTitle}>{isAuthenticated() ? `Hola, ${user?.username}` : "Mi Cuenta"}</h3>
           </div>
           <div className={styles.dropdownContent}>
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                handleLogin()
-              }}
-              className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
-              style={{ outline: "none" }}
-            >
-              <span className={styles.dropdownItemText}>Iniciar Sesión</span>
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                handleRegister()
-              }}
-              className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
-              style={{ outline: "none" }}
-            >
-              <span className={styles.dropdownItemText}>Crear Cuenta</span>
-            </button>
+            {isAuthenticated() ? (
+              // Usuario autenticado - mostrar opciones de usuario logueado
+              <>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleProfile()
+                  }}
+                  className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
+                  style={{ outline: "none" }}
+                >
+                  <span className={styles.dropdownItemText}>Mi Perfil</span>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    navigate("/checkout")
+                    setIsOpen(false)
+                  }}
+                  className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
+                  style={{ outline: "none" }}
+                >
+                  <span className={styles.dropdownItemText}>Mis Pedidos</span>
+                </button>
+                <div className={styles.dropdownDivider}></div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleLogout()
+                  }}
+                  className={`${styles.dropdownItem} ${styles.logoutItem} ${darkMode ? styles.dark : ""}`}
+                  style={{ outline: "none" }}
+                >
+                  <span className={styles.dropdownItemText}>Cerrar Sesión</span>
+                </button>
+              </>
+            ) : (
+              // Usuario no autenticado - mostrar opciones de login/registro
+              <>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleLogin()
+                  }}
+                  className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
+                  style={{ outline: "none" }}
+                >
+                  <span className={styles.dropdownItemText}>Iniciar Sesión</span>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleRegister()
+                  }}
+                  className={`${styles.dropdownItem} ${darkMode ? styles.dark : ""}`}
+                  style={{ outline: "none" }}
+                >
+                  <span className={styles.dropdownItemText}>Crear Cuenta</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

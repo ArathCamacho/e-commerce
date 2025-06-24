@@ -1,6 +1,9 @@
-import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+"use client"
+
+import { useState, useEffect } from "react"
+import { useNavigate, Link, useSearchParams } from "react-router-dom"
 import { useTheme } from "./context/themeContext"
+import { useAuth } from "./context/AuthContext"
 import styles from "./styles/login.module.css"
 
 const ArrowLeft = ({ size = 24, className = "" }) => (
@@ -24,7 +27,23 @@ export default function InicioSesion() {
   const [errorMsg, setErrorMsg] = useState("")
   const [currentError, setCurrentError] = useState("")
   const { darkMode, mounted } = useTheme()
+  const { login, isAuthenticated } = useAuth()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+
+  // Obtener parámetro de redirección
+  const redirectTo = searchParams.get("redirect")
+
+  // Si ya está autenticado, redirigir
+  useEffect(() => {
+    if (isAuthenticated()) {
+      if (redirectTo === "checkout") {
+        navigate("/checkout")
+      } else {
+        navigate("/principal")
+      }
+    }
+  }, [isAuthenticated, navigate, redirectTo])
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -62,11 +81,17 @@ export default function InicioSesion() {
 
       if (response.ok) {
         const data = await response.json()
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("user", JSON.stringify(data.user))
-        navigate("/principal")
+        login(data.user, data.token) // Usar el contexto de autenticación
+
+        // Redirigir según el parámetro
+        if (redirectTo === "checkout") {
+          navigate("/checkout")
+        } else {
+          navigate("/principal")
+        }
       } else {
-        throw new Error("Error al iniciar sesión")
+        const errorData = await response.json()
+        setErrorMsg(errorData.error || "Error al iniciar sesión")
       }
     } catch (error) {
       console.error(error)
@@ -142,6 +167,13 @@ export default function InicioSesion() {
         {/* Formulario */}
         <div className={styles.formContainer}>
           <h2 className={`${styles.formTitle} ${darkMode ? "dark" : ""}`}>Iniciar Sesión</h2>
+
+          {/* Mensaje informativo si viene del carrito */}
+          {redirectTo === "checkout" && (
+            <div className={styles.redirectMessage}>
+              <p>Inicia sesión para continuar con tu compra</p>
+            </div>
+          )}
 
           {errorMsg && <p className={`${styles.errorMsg} ${darkMode ? "dark" : ""}`}>{errorMsg}</p>}
 
@@ -242,7 +274,10 @@ export default function InicioSesion() {
           <div className={styles.loginLinkContainer}>
             <p className={`${styles.loginText} ${darkMode ? "dark" : ""}`}>
               ¿No tienes cuenta?{" "}
-              <Link to="/register" className={`${styles.loginLink} ${darkMode ? "dark" : ""}`}>
+              <Link
+                to={`/register${redirectTo ? `?redirect=${redirectTo}` : ""}`}
+                className={`${styles.loginLink} ${darkMode ? "dark" : ""}`}
+              >
                 Regístrate aquí
               </Link>
             </p>

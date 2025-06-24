@@ -1,14 +1,26 @@
 "use client"
 
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext"
 import PaymentMethods from "./PaymentMethods"
 import styles from "./OrderSummary.module.css"
 
 export default function OrderSummary({ subtotal, shipping, total, freeShippingThreshold = 800 }) {
   const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
 
   const handleContinueCheckout = () => {
-    navigate("/checkout")
+    if (isAuthenticated()) {
+      // Usuario autenticado, ir directamente al checkout
+      navigate("/checkout")
+    } else {
+      // Usuario no autenticado, ir al login con parámetro de redirección
+      navigate("/login?redirect=checkout")
+    }
+  }
+
+  const handleLogin = () => {
+    navigate("/login?redirect=checkout")
   }
 
   // Calcular cuánto falta para envío gratis
@@ -74,9 +86,12 @@ export default function OrderSummary({ subtotal, shipping, total, freeShippingTh
           CONTINUAR CON LA COMPRA
         </button>
 
-        <button className={styles.loginButton} onClick={() => navigate("/login")}>
-          INICIAR SESIÓN
-        </button>
+        {/* Solo mostrar botón de login si no está autenticado */}
+        {!isAuthenticated() && (
+          <button className={styles.loginButton} onClick={handleLogin}>
+            INICIAR SESIÓN
+          </button>
+        )}
 
         <PaymentMethods />
       </div>
