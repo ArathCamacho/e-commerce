@@ -1,112 +1,122 @@
 .productCard {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-primary);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.2s ease;
-    width: 100%;
-  }
-  
-  .productCard:hover {
-    border-color: var(--text-secondary);
-    transform: translateY(-2px);
-  }
-  
-  .imageWrapper {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .productImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .productImage:hover {
-    transform: scale(1.02);
-  }
-  
-  .removeBtn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 28px;
-    height: 28px;
-    background: transparent;
-    color: #666;
-    border: none;
-    border-radius: 0;
-    font-size: 18px;
-    font-weight: 300;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.2s ease;
-  }
-  
-  .productCard:hover .removeBtn {
-    opacity: 1;
-  }
-  
-  .removeBtn:hover {
-    color: #ef4444;
-    background: transparent;
-    transform: scale(1.1);
-  }
-  
-  .productDetails {
-    padding: 1.25rem;
-  }
-  
-  .productName {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    color: var(--text-primary);
-    transition: color 0.2s ease;
-    line-height: 1.3;
-  }
-  
-  .productName:hover {
-    color: var(--primary);
-  }
-  
-  .productPrice {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-  }
-  
-  .productColor {
-    font-size: 0.9rem;
-    color: var(--text-tertiary);
-    margin-bottom: 1rem;
-  }
-  
-  .addToCartBtn {
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .addToCartBtn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-  }
-  
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.productCard:hover {
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  width: 100%;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.productImage:hover {
+  transform: scale(1.02);
+}
+
+.removeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  color: #666;
+  border: none;
+  border-radius: 0;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.productCard:hover .removeBtn {
+  opacity: 1;
+}
+
+.removeBtn:hover {
+  color: #ef4444;
+  background: transparent;
+  transform: scale(1.1);
+}
+
+.productDetails {
+  padding: 1.25rem;
+}
+
+.productName {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+  line-height: 1.3;
+}
+
+.productName:hover {
+  color: var(--primary);
+}
+
+.productPrice {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.productColor {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.addToCartBtn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none !important; /* Elimina el contorno en foco */
+  box-shadow: none !important; /* Asegura que no haya sombra de foco */
+}
+
+.addToCartBtn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.addToCartBtn:focus,
+.addToCartBtn:active,
+.addToCartBtn:focus-visible {
+  /* Añadido :focus-visible para mayor compatibilidad */
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important; /* Asegura que no haya ningún borde en el foco */
+}
