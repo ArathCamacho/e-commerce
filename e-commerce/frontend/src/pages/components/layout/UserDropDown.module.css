@@ -13,10 +13,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-secondary); /* ADDED: Ensure icon color matches other header icons */
 }
 
 .dropdownButton:hover {
   background-color: rgba(0, 0, 0, 0.05);
+  color: var(--primary); /* ADDED: Ensure hover color matches other header icons */
 }
 
 .dropdownButton.dark:hover {

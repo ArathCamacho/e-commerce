@@ -1,0 +1,44 @@
+.emptyState {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .emptyIcon {
+    font-size: 4rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .emptyTitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+  
+  .emptyText {
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+  
+  .exploreButton {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .exploreButton:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+  

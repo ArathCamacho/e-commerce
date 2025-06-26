@@ -7,6 +7,7 @@ import InicioSesion from "./pages/inicioSesion"
 import Registrarse from "./pages/signUp"
 import ProductDetail from "./pages/ProductDetail/index"
 import Checkout from "./pages/Checkout/index"
+import Wishlist from "./pages/Wishlist/index"
 import "./pages/styles/global.css"
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/producto/:productId" element={<ProductDetail />} />
+            <Route path="/wishlist" element={<Wishlist />} />
           </Routes>
         </Router>
       </AuthProvider>
